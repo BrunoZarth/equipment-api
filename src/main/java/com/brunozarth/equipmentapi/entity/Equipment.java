@@ -3,8 +3,9 @@ package com.brunozarth.equipmentapi.entity;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "equipment")
 public class Equipment {
-    // equipment: id, type, model, name, color, size, observations, brand, img, isRented
+    // equipment: id, type, model, name, color, size, observations, brand, imgUrl, isRented
 
 
     public Equipment(Long id, String type, String model, String name, String color, String size, String observations, String brand, String imgUrl, boolean isRented) {

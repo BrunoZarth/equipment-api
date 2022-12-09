@@ -3,7 +3,9 @@ package com.brunozarth.equipmentapi.entity;
 
 import javax.persistence.*;
 
+
 @Entity
+@Table(name = "client")
 public class Client {
     // client: id, name, adress, email, phone
 
@@ -16,7 +18,7 @@ public class Client {
         this.phone = phone;
     }
 
-    public Client(){}
+    public Client(){};
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +33,7 @@ public class Client {
     private String email;
 
     private String phone;
+
 
     public Long getId() {
         return id;

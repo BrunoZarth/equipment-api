@@ -1,11 +1,8 @@
 package com.brunozarth.equipmentapi.entity;
 
-import javax.persistence.Embeddable;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
-
 @Embeddable
 public class EquipmentRentHistoryId implements Serializable {
 
