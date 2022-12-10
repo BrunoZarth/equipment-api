@@ -10,11 +10,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/equipmentStateHistory")
+@RequestMapping("/equipmentRentHistory")
 public class EquipmentRentHistoryController {
 
-    @Autowired
-    private EquipmentRentHistoryRepository erhr;
+    private final EquipmentRentHistoryRepository erhr;
+
+    public EquipmentRentHistoryController(EquipmentRentHistoryRepository erhr) {
+        this.erhr = erhr;
+    }
 
     @GetMapping
     public List<EquipmentRentHistory> findAll(){

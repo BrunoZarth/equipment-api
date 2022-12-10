@@ -11,8 +11,11 @@ import java.util.List;
 @RequestMapping("/equipment")
 public class EquipmentController {
 
-    @Autowired
-    private EquipmentRepository er;
+    private final EquipmentRepository er;
+
+    public EquipmentController(EquipmentRepository er) {
+        this.er = er;
+    }
 
     @GetMapping
     public List<Equipment> findAll(){
