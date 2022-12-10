@@ -1,5 +1,7 @@
 package com.brunozarth.equipmentapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -24,8 +26,10 @@ public class EquipmentRentHistory {
     @EmbeddedId
     EquipmentRentHistoryId equipmentRentHistoryId;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss.SSS")
     private Timestamp devolutionPredictedDate;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss.SSS")
     private Timestamp devolutionDate;
 
     @ManyToOne

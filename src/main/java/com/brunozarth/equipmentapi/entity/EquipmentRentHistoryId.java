@@ -1,5 +1,7 @@
 package com.brunozarth.equipmentapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -19,6 +21,7 @@ public class EquipmentRentHistoryId implements Serializable {
     @JoinColumn(name = "equipment_id")
     Equipment equipment;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss.SSS")
     Timestamp rentDate;
 
     public Equipment getEquipment() {
