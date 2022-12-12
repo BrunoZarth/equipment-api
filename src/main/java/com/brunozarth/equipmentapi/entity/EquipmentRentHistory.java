@@ -4,38 +4,29 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 public class EquipmentRentHistory {
     // equipmentRentHistory: id=(equipment, rentDate), devolutionPredictedDate, devolutionDate, client, observations
 
 
-    public EquipmentRentHistory(Long id, Equipment equipment, Client client, String observations) {
-        this.id = id;
-        this.equipment = equipment;
+    public EquipmentRentHistory(EquipmentRentHistoryId equipmentRentHistoryId, String devolutionPredictedDate, String devolutionDate, Client client, String observations) {
+        this.equipmentRentHistoryId = equipmentRentHistoryId;
+        this.devolutionPredictedDate = devolutionPredictedDate;
+        this.devolutionDate = devolutionDate;
         this.client = client;
         this.observations = observations;
     }
 
     public EquipmentRentHistory(){}
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Long id;
+    @EmbeddedId
+    EquipmentRentHistoryId equipmentRentHistoryId;
 
-    @ManyToOne
-    @JoinColumn(name = "equipment_id")
-    Equipment equipment;
+    private String devolutionPredictedDate;
 
-    //@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss.SSS")
-    //Timestamp rentDate;
-
-    //@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss.SSS")
-    //private Timestamp devolutionPredictedDate;
-
-    //@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss.SSS")
-    //private Timestamp devolutionDate;
+    private String devolutionDate;
 
     @ManyToOne
     @JoinColumn(name = "client_id")
@@ -43,20 +34,28 @@ public class EquipmentRentHistory {
 
     private String observations;
 
-    public Long getId() {
-        return id;
+    public EquipmentRentHistoryId getEquipmentRentHistoryId() {
+        return equipmentRentHistoryId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setEquipmentRentHistoryId(EquipmentRentHistoryId equipmentRentHistoryId) {
+        this.equipmentRentHistoryId = equipmentRentHistoryId;
     }
 
-    public Equipment getEquipment() {
-        return equipment;
+    public String getDevolutionPredictedDate() {
+        return devolutionPredictedDate;
     }
 
-    public void setEquipment(Equipment equipment) {
-        this.equipment = equipment;
+    public void setDevolutionPredictedDate(String devolutionPredictedDate) {
+        this.devolutionPredictedDate = devolutionPredictedDate;
+    }
+
+    public String getDevolutionDate() {
+        return devolutionDate;
+    }
+
+    public void setDevolutionDate(String devolutionDate) {
+        this.devolutionDate = devolutionDate;
     }
 
     public Client getClient() {
