@@ -17,12 +17,12 @@ public class ClientServiceImpl implements IClientService {
     }
     @Override
     public List<Client> findAll() {
-        return null;
+        return clientRepository.findAll();
     }
 
     @Override
     public List<Client> findByName(String name) {
-        return null;
+        return clientRepository.findByName(name);
     }
 
     @Override
@@ -32,16 +32,34 @@ public class ClientServiceImpl implements IClientService {
 
     @Override
     public Client saveClient(ClientForm clientForm) {
-        return null;
+        Client client = new Client();
+
+        if(clientForm.getAdress() == null) clientForm.setAdress("not informed"); else client.setAdress(clientForm.getAdress());
+        if(clientForm.getEmail() == null) clientForm.setEmail("not informed"); else client.setEmail(clientForm.getEmail());
+        if(clientForm.getPhone() == null) clientForm.setPhone("not informed"); else client.setPhone(clientForm.getAdress());
+
+        client.setName(clientForm.getName());
+
+        return clientRepository.save(client);
     }
 
     @Override
     public Client updateClient(Long id, ClientForm clientForm) {
-        return null;
+
+        Client client = this.findById(id);
+
+        if(clientForm.getAdress() == null) clientForm.setAdress("not informed"); else client.setAdress(clientForm.getAdress());
+        if(clientForm.getEmail() == null) clientForm.setEmail("not informed"); else client.setEmail(clientForm.getEmail());
+        if(clientForm.getPhone() == null) clientForm.setPhone("not informed"); else client.setPhone(clientForm.getAdress());
+
+        client.setName(clientForm.getName());
+
+        return clientRepository.save(client);
     }
 
     @Override
     public void deleteClient(Long id) {
-
+        Client client = this.findById(id);
+        clientRepository.delete(client);
     }
 }

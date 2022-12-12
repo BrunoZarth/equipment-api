@@ -7,14 +7,14 @@ import java.util.List;
 
 public interface IClientService {
 
-    //GET
+    //GET / READ
     List<Client> findAll();
 
     List<Client> findByName(String name);
 
     Client findById(Long id);
 
-    //POST
+    //POST / CREATE
     Client saveClient(ClientForm clientForm);
 
     //UPDATE
