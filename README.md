@@ -15,3 +15,8 @@ Process:
     fly launch --image brunozarth/equipment-api:tagname
 
 
+Documentation (swagger):
+
+  - http://localhost:8080/swagger-ui/index.html#
+
+ 
