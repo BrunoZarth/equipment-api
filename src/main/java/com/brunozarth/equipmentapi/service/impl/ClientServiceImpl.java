@@ -36,7 +36,7 @@ public class ClientServiceImpl implements IClientService {
 
         if(clientForm.getAdress() == null) clientForm.setAdress("not informed"); else client.setAdress(clientForm.getAdress());
         if(clientForm.getEmail() == null) clientForm.setEmail("not informed"); else client.setEmail(clientForm.getEmail());
-        if(clientForm.getPhone() == null) clientForm.setPhone("not informed"); else client.setPhone(clientForm.getAdress());
+        if(clientForm.getPhone() == null) clientForm.setPhone("not informed"); else client.setPhone(clientForm.getPhone());
 
         client.setName(clientForm.getName());
 
@@ -50,7 +50,7 @@ public class ClientServiceImpl implements IClientService {
 
         if(clientForm.getAdress() == null) clientForm.setAdress("not informed"); else client.setAdress(clientForm.getAdress());
         if(clientForm.getEmail() == null) clientForm.setEmail("not informed"); else client.setEmail(clientForm.getEmail());
-        if(clientForm.getPhone() == null) clientForm.setPhone("not informed"); else client.setPhone(clientForm.getAdress());
+        if(clientForm.getPhone() == null) clientForm.setPhone("not informed"); else client.setPhone(clientForm.getPhone());
 
         client.setName(clientForm.getName());
 
