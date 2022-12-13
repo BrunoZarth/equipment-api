@@ -6,4 +6,4 @@ docker tag equipment-api:0.0.1-SNAPSHOT brunozarth/equipment-api:equipment-api
 
 docker push brunozarth/equipment-api:equipment-api
 
-flyctl deploy --remote-only
+
