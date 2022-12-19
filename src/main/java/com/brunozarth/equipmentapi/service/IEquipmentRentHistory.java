@@ -16,12 +16,12 @@ public interface IEquipmentRentHistory {
 
     EquipmentRentHistory findById(EquipmentRentHistoryId equipmentRentHistoryId);
 
-    List<EquipmentRentHistory> findByEquipment(Equipment equipment);
+    List<EquipmentRentHistory> findByEquipmentRentHistoryIdEquipment(Equipment equipment);
 
 
     List<EquipmentRentHistory> findByClient(Client client);
 
-    List<EquipmentRentHistory> findByRentDate(String rentDate);
+    List<EquipmentRentHistory> findByEquipmentRentHistoryIdRentDate(String rentDate);
 
     List<EquipmentRentHistory> findByDevolutionPredictedDate(String devolutionPredictedDate);
 

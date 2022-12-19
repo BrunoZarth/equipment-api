@@ -11,11 +11,11 @@ import java.util.List;
 
 @Repository
 public interface EquipmentRentHistoryRepository extends JpaRepository<EquipmentRentHistory, EquipmentRentHistoryId> {
-    List<EquipmentRentHistory> findByEquipmentId(Long equipmentId);
+    List<EquipmentRentHistory> findByEquipmentRentHistoryIdEquipment(Equipment equipment);
 
     List<EquipmentRentHistory> findByClientId(Long clientId);
 
-    List<EquipmentRentHistory> findByRentDate(String rentDate);
+    List<EquipmentRentHistory> findByEquipmentRentHistoryIdRentDate(String rentDate);
 
     List<EquipmentRentHistory> findByDevolutionPredictedDate(String devolutionPredictedDate);
 

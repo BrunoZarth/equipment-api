@@ -35,9 +35,9 @@ public class EquipmentRentHistoryServiceImpl implements IEquipmentRentHistory {
 
 
     @Override
-    public List<EquipmentRentHistory> findByEquipment(Equipment equipment) {
-        Long equipmentId = equipment.getId();
-        return equipmentRHRepository.findByEquipmentId(equipmentId);
+    public List<EquipmentRentHistory> findByEquipmentRentHistoryIdEquipment(Equipment equipment) {
+        //Long equipmentId = equipment.getId();
+        return equipmentRHRepository.findByEquipmentRentHistoryIdEquipment(equipment);
     }
 
     @Override
@@ -47,8 +47,8 @@ public class EquipmentRentHistoryServiceImpl implements IEquipmentRentHistory {
     }
 
     @Override
-    public List<EquipmentRentHistory> findByRentDate(String rentDate) {
-        return equipmentRHRepository.findByRentDate(rentDate);
+    public List<EquipmentRentHistory> findByEquipmentRentHistoryIdRentDate(String rentDate) {
+        return equipmentRHRepository.findByEquipmentRentHistoryIdRentDate(rentDate);
     }
 
     @Override

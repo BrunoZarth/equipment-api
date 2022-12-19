@@ -44,7 +44,7 @@ public class EquipmentRentHistoryController {
     @GetMapping("/findByEquipment")
     @ResponseStatus(HttpStatus.FOUND)
     ResponseEntity<List<EquipmentRentHistory>> findByEquipment(@RequestBody Equipment equipment){
-        return new ResponseEntity<>(equipmentRHService.findByEquipment(equipment), HttpStatus.FOUND);
+        return new ResponseEntity<>(equipmentRHService.findByEquipmentRentHistoryIdEquipment(equipment), HttpStatus.FOUND);
     };
 
     @GetMapping("/findByClient")
@@ -56,7 +56,7 @@ public class EquipmentRentHistoryController {
     @GetMapping("/findByRentDate/{rentDate}")
     @ResponseStatus(HttpStatus.FOUND)
     ResponseEntity<List<EquipmentRentHistory>> findByRentDate(@PathVariable String rentDate){
-        return new ResponseEntity<>(equipmentRHService.findByRentDate(rentDate), HttpStatus.FOUND);
+        return new ResponseEntity<>(equipmentRHService.findByEquipmentRentHistoryIdRentDate(rentDate), HttpStatus.FOUND);
     };
 
     @GetMapping("/findByDevolutionPredictedDate/{devolutionPredictedDate}")
