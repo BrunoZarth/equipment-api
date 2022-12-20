@@ -8,6 +8,7 @@ import com.brunozarth.equipmentapi.entity.form.EquipmentRentHistoryForm;
 import com.brunozarth.equipmentapi.exception.BadRequestException;
 import com.brunozarth.equipmentapi.repository.EquipmentRentHistoryRepository;
 import com.brunozarth.equipmentapi.service.IEquipmentRentHistory;
+import com.brunozarth.equipmentapi.utils.DateUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -54,7 +55,7 @@ public class EquipmentRentHistoryServiceImpl implements IEquipmentRentHistory {
         return equipmentRHRepository.findByClientId(clientId);
     }
 
-    @Override 
+    @Override
     public List<EquipmentRentHistory> findByEquipmentRentHistoryIdRentDate(String rentDate) {
         return equipmentRHRepository.findByEquipmentRentHistoryIdRentDate(rentDate);
     }
@@ -72,17 +73,21 @@ public class EquipmentRentHistoryServiceImpl implements IEquipmentRentHistory {
     @Override
     public EquipmentRentHistory saveEquipmentRentHistory(EquipmentRentHistoryForm equipmentRentHistoryForm) {
 
+        DateUtil dateUtil = new DateUtil();
+
         EquipmentRentHistoryId equipmentRentHistoryId = new EquipmentRentHistoryId();
         equipmentRentHistoryId.setEquipment(equipmentRentHistoryForm.getEquipment());
-        equipmentRentHistoryId.setRentDate(equipmentRentHistoryForm.getRentDate());
+        equipmentRentHistoryId.setRentDate(dateUtil.extractInt(equipmentRentHistoryForm.getRentDate())); // only numbers
 
         EquipmentRentHistory equipmentRentHistory = new EquipmentRentHistory();
 
         equipmentRentHistory.setEquipmentRentHistoryId(equipmentRentHistoryId);
-        equipmentRentHistory.setDevolutionPredictedDate(equipmentRentHistoryForm.getDevolutionPredictedDate());
-        equipmentRentHistory.setDevolutionDate(equipmentRentHistoryForm.getDevolutionDate());
+        equipmentRentHistory.setDevolutionPredictedDate(dateUtil.extractInt(equipmentRentHistoryForm.getDevolutionPredictedDate()));
+        equipmentRentHistory.setDevolutionDate(dateUtil.extractInt(equipmentRentHistoryForm.getDevolutionDate()));
         equipmentRentHistory.setClient(equipmentRentHistoryForm.getClient());
         equipmentRentHistory.setObservations(equipmentRentHistoryForm.getObservations());
+
+
 
         return equipmentRHRepository.save(equipmentRentHistory);
     }
@@ -90,10 +95,12 @@ public class EquipmentRentHistoryServiceImpl implements IEquipmentRentHistory {
     @Override //MUST CREATE NEW CLASS EquipmentRentHistoryFormUpdate !!!!
     public EquipmentRentHistory updateEquipmentRentHistory(Long equipmentId, String rentDate, EquipmentRentHistoryForm equipmentRentHistoryForm) {
 
+        DateUtil dateUtil = new DateUtil();
+
         EquipmentRentHistory equipmentRentHistory = this.findById(equipmentId, rentDate);
 
-        equipmentRentHistory.setDevolutionPredictedDate(equipmentRentHistoryForm.getDevolutionPredictedDate());
-        equipmentRentHistory.setDevolutionDate(equipmentRentHistoryForm.getDevolutionDate());
+        equipmentRentHistory.setDevolutionPredictedDate(dateUtil.extractInt(equipmentRentHistoryForm.getDevolutionPredictedDate()));
+        equipmentRentHistory.setDevolutionDate(dateUtil.extractInt(equipmentRentHistoryForm.getDevolutionDate()));
         equipmentRentHistory.setClient(equipmentRentHistoryForm.getClient());
         equipmentRentHistory.setObservations(equipmentRentHistoryForm.getObservations());
 

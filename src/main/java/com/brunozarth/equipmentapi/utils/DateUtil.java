@@ -15,4 +15,11 @@ public class DateUtil {
         LocalDateTime dateTime = LocalDateTime.parse(dateString, formatter);
         return dateTime;
     }
+
+    public String extractInt(String str) {
+        str = str.replaceAll("[^0-9]", " "); // regular expression
+        str = str.replaceAll(" +", " ");
+        if(str.equals("")) return "-1";
+        return str;
+    }
 }
