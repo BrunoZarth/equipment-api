@@ -77,6 +77,7 @@ public class EquipmentServiceImpl implements IEquipmentService {
         equipment.setType(equipmentForm.getType());
         equipment.setImgUrl(equipmentForm.getImgUrl());
         equipment.setSize(equipmentForm.getSize());
+        equipment.setRented(equipmentForm.isRented());
 
         return equipmentRepository.save(equipment);
     }
