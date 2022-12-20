@@ -14,12 +14,12 @@ public interface IEquipmentRentHistory {
     //GET / READ
     List<EquipmentRentHistory> findAll();
 
-    EquipmentRentHistory findById(EquipmentRentHistoryId equipmentRentHistoryId);
+    EquipmentRentHistory findById(Long equipmentId, String rentDate);
 
-    List<EquipmentRentHistory> findByEquipmentRentHistoryIdEquipment(Equipment equipment);
+    List<EquipmentRentHistory> findByEquipmentRentHistoryIdEquipmentId(Long equipmentId);
 
 
-    List<EquipmentRentHistory> findByClient(Client client);
+    List<EquipmentRentHistory> findByClientId(Long clientId);
 
     List<EquipmentRentHistory> findByEquipmentRentHistoryIdRentDate(String rentDate);
 

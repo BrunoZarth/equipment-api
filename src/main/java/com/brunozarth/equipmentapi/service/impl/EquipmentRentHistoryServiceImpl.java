@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class EquipmentRentHistoryServiceImpl implements IEquipmentRentHistory {
@@ -29,24 +30,31 @@ public class EquipmentRentHistoryServiceImpl implements IEquipmentRentHistory {
     }
 
     @Override
-    public EquipmentRentHistory findById(EquipmentRentHistoryId equipmentRentHistoryId) {
-        return equipmentRHRepository.findById(equipmentRentHistoryId).orElseThrow(() -> new BadRequestException("Equipment Rent History Id not found"));
+    public EquipmentRentHistory findById(Long equipmentId, String rentDate) { 
+        
+        List<EquipmentRentHistory> equipmentRentHistoryIdList = this.findByEquipmentRentHistoryIdEquipmentId(equipmentId)
+                .stream()
+                .filter(e -> e.getEquipmentRentHistoryId().getRentDate().equals(rentDate))
+                .collect(Collectors.toList());
+        
+        EquipmentRentHistoryId equipmentRentHistoryId = equipmentRentHistoryIdList.get(0).getEquipmentRentHistoryId();
+
+        return equipmentRentHistoryIdList.get(0);
+        // return equipmentRHRepository.findById(equipmentRentHistoryId).orElseThrow(() -> new BadRequestException("Equipment Rent History Id not found"));
     }
 
 
     @Override
-    public List<EquipmentRentHistory> findByEquipmentRentHistoryIdEquipment(Equipment equipment) {
-        //Long equipmentId = equipment.getId();
-        return equipmentRHRepository.findByEquipmentRentHistoryIdEquipment(equipment);
+    public List<EquipmentRentHistory> findByEquipmentRentHistoryIdEquipmentId(Long equipmentId) {
+        return equipmentRHRepository.findByEquipmentRentHistoryIdEquipmentId(equipmentId);
     }
 
     @Override
-    public List<EquipmentRentHistory> findByClient(Client client) {
-        Long clientId = client.getId();
+    public List<EquipmentRentHistory> findByClientId(Long clientId) {
         return equipmentRHRepository.findByClientId(clientId);
     }
 
-    @Override
+    @Override 
     public List<EquipmentRentHistory> findByEquipmentRentHistoryIdRentDate(String rentDate) {
         return equipmentRHRepository.findByEquipmentRentHistoryIdRentDate(rentDate);
     }
@@ -79,12 +87,10 @@ public class EquipmentRentHistoryServiceImpl implements IEquipmentRentHistory {
         return equipmentRHRepository.save(equipmentRentHistory);
     }
 
-    @Override
+    @Override //MUST CREATE NEW CLASS EquipmentRentHistoryFormUpdate !!!!
     public EquipmentRentHistory updateEquipmentRentHistory(Long equipmentId, String rentDate, EquipmentRentHistoryForm equipmentRentHistoryForm) {
-        EquipmentRentHistoryId equipmentRentHistoryId = new EquipmentRentHistoryId();
-        equipmentRentHistoryId.setEquipment(equipmentService.findById(equipmentId));
-        equipmentRentHistoryId.setRentDate(rentDate);
-        EquipmentRentHistory equipmentRentHistory = this.findById(equipmentRentHistoryId);
+
+        EquipmentRentHistory equipmentRentHistory = this.findById(equipmentId, rentDate);
 
         equipmentRentHistory.setDevolutionPredictedDate(equipmentRentHistoryForm.getDevolutionPredictedDate());
         equipmentRentHistory.setDevolutionDate(equipmentRentHistoryForm.getDevolutionDate());
@@ -96,11 +102,7 @@ public class EquipmentRentHistoryServiceImpl implements IEquipmentRentHistory {
 
     @Override
     public void deleteEquipmentRentHistory(Long equipmentId, String rentDate) {
-        EquipmentRentHistoryId equipmentRentHistoryId = new EquipmentRentHistoryId();
-        equipmentRentHistoryId.setEquipment(equipmentService.findById(equipmentId));
-        equipmentRentHistoryId.setRentDate(rentDate);
-
-        EquipmentRentHistory equipmentRentHistory = this.findById(equipmentRentHistoryId);
+        EquipmentRentHistory equipmentRentHistory = this.findById(equipmentId, rentDate);
         equipmentRHRepository.delete(equipmentRentHistory);
     }
 }

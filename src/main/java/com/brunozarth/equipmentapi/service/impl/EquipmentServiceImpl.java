@@ -61,7 +61,7 @@ public class EquipmentServiceImpl implements IEquipmentService {
         equipment.setSize(equipmentForm.getSize());
         equipment.setRented(false);
 
-        return equipment;
+        return equipmentRepository.save(equipment);
     }
 
     @Override
@@ -78,7 +78,7 @@ public class EquipmentServiceImpl implements IEquipmentService {
         equipment.setImgUrl(equipmentForm.getImgUrl());
         equipment.setSize(equipmentForm.getSize());
 
-        return equipment;
+        return equipmentRepository.save(equipment);
     }
 
     @Override

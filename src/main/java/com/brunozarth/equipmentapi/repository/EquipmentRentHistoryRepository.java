@@ -20,4 +20,6 @@ public interface EquipmentRentHistoryRepository extends JpaRepository<EquipmentR
     List<EquipmentRentHistory> findByDevolutionPredictedDate(String devolutionPredictedDate);
 
     List<EquipmentRentHistory> findByDevolutionDate(String devolutionDate);
+
+    List<EquipmentRentHistory> findByEquipmentRentHistoryIdEquipmentId(Long equipmentId);
 }

@@ -30,45 +30,45 @@ public class EquipmentRentHistoryController {
     //GET / READ
 
     @GetMapping("/findAll")
-    @ResponseStatus(HttpStatus.FOUND)
+    @ResponseStatus(HttpStatus.OK)
     ResponseEntity<List<EquipmentRentHistory>> findAll(){
-        return new ResponseEntity<>(equipmentRHService.findAll(), HttpStatus.FOUND);
+        return new ResponseEntity<>(equipmentRHService.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/findById")
-    @ResponseStatus(HttpStatus.FOUND)
-    ResponseEntity<EquipmentRentHistory> findById(@RequestBody EquipmentRentHistoryId equipmentRentHistoryId){
-        return new ResponseEntity<>(equipmentRHService.findById(equipmentRentHistoryId), HttpStatus.FOUND);
+    @GetMapping("/findById/{equipmentId}/{rentDate}")
+    @ResponseStatus(HttpStatus.OK)
+    ResponseEntity<EquipmentRentHistory> findById(@PathVariable Long equipmentId, @PathVariable String rentDate){
+        return new ResponseEntity<>(equipmentRHService.findById(equipmentId, rentDate), HttpStatus.OK);
     };
 
-    @GetMapping("/findByEquipment")
-    @ResponseStatus(HttpStatus.FOUND)
-    ResponseEntity<List<EquipmentRentHistory>> findByEquipment(@RequestBody Equipment equipment){
-        return new ResponseEntity<>(equipmentRHService.findByEquipmentRentHistoryIdEquipment(equipment), HttpStatus.FOUND);
+    @GetMapping("/findByEquipment/{equipmentId}")
+    @ResponseStatus(HttpStatus.OK)
+    ResponseEntity<List<EquipmentRentHistory>> findByEquipmentId(@PathVariable Long equipmentId){
+        return new ResponseEntity<>(equipmentRHService.findByEquipmentRentHistoryIdEquipmentId(equipmentId), HttpStatus.OK);
     };
 
-    @GetMapping("/findByClient")
-    @ResponseStatus(HttpStatus.FOUND)
-    ResponseEntity<List<EquipmentRentHistory>> findByClient(@RequestBody Client client){
-        return new ResponseEntity<>(equipmentRHService.findByClient(client), HttpStatus.FOUND);
+    @GetMapping("/findByClientId/{clientId}")
+    @ResponseStatus(HttpStatus.OK)
+    ResponseEntity<List<EquipmentRentHistory>> findByClientId(@PathVariable Long clientId){
+        return new ResponseEntity<>(equipmentRHService.findByClientId(clientId), HttpStatus.OK);
     };
 
     @GetMapping("/findByRentDate/{rentDate}")
-    @ResponseStatus(HttpStatus.FOUND)
+    @ResponseStatus(HttpStatus.OK)
     ResponseEntity<List<EquipmentRentHistory>> findByRentDate(@PathVariable String rentDate){
-        return new ResponseEntity<>(equipmentRHService.findByEquipmentRentHistoryIdRentDate(rentDate), HttpStatus.FOUND);
+        return new ResponseEntity<>(equipmentRHService.findByEquipmentRentHistoryIdRentDate(rentDate), HttpStatus.OK);
     };
 
     @GetMapping("/findByDevolutionPredictedDate/{devolutionPredictedDate}")
-    @ResponseStatus(HttpStatus.FOUND)
+    @ResponseStatus(HttpStatus.OK)
     ResponseEntity<List<EquipmentRentHistory>> findByDevolutionPredictedDate(@PathVariable String devolutionPredictedDate){
-        return new ResponseEntity<>(equipmentRHService.findByDevolutionPredictedDate(devolutionPredictedDate), HttpStatus.FOUND);
+        return new ResponseEntity<>(equipmentRHService.findByDevolutionPredictedDate(devolutionPredictedDate), HttpStatus.OK);
     };
 
     @GetMapping("/findByDevolutionDate/{devolutionDate}")
-    @ResponseStatus(HttpStatus.FOUND)
+    @ResponseStatus(HttpStatus.OK)
     ResponseEntity<List<EquipmentRentHistory>> findByDevolutionDate(@PathVariable String devolutionDate){
-        return new ResponseEntity<>(equipmentRHService.findByDevolutionDate(devolutionDate), HttpStatus.FOUND);
+        return new ResponseEntity<>(equipmentRHService.findByDevolutionDate(devolutionDate), HttpStatus.OK);
     };
 
     //POST / CREATE
