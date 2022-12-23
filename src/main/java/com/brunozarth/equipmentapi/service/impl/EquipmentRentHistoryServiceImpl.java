@@ -7,8 +7,12 @@ import com.brunozarth.equipmentapi.entity.EquipmentRentHistoryId;
 import com.brunozarth.equipmentapi.entity.form.EquipmentRentHistoryForm;
 import com.brunozarth.equipmentapi.exception.BadRequestException;
 import com.brunozarth.equipmentapi.repository.EquipmentRentHistoryRepository;
+import com.brunozarth.equipmentapi.repository.EquipmentRepository;
 import com.brunozarth.equipmentapi.service.IEquipmentRentHistory;
 import com.brunozarth.equipmentapi.utils.DateUtil;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -20,28 +24,35 @@ public class EquipmentRentHistoryServiceImpl implements IEquipmentRentHistory {
 
     EquipmentRentHistoryRepository equipmentRHRepository;
     EquipmentServiceImpl equipmentService;
+    private final EquipmentRepository equipmentRepository;
 
-    EquipmentRentHistoryServiceImpl(EquipmentRentHistoryRepository equipmentRHRepository, EquipmentServiceImpl equipmentService){
+    EquipmentRentHistoryServiceImpl(EquipmentRentHistoryRepository equipmentRHRepository, EquipmentServiceImpl equipmentService,
+                                    EquipmentRepository equipmentRepository){
         this.equipmentRHRepository = equipmentRHRepository;
         this.equipmentService = equipmentService;
+        this.equipmentRepository = equipmentRepository;
     }
     @Override
-    public List<EquipmentRentHistory> findAll() {
-        return equipmentRHRepository.findAll();
+    public Page<EquipmentRentHistory> findAll(Pageable pageable) {
+        return equipmentRHRepository.findAll(pageable);
     }
 
     @Override
-    public EquipmentRentHistory findById(Long equipmentId, String rentDate) { 
-        
-        List<EquipmentRentHistory> equipmentRentHistoryIdList = this.findByEquipmentRentHistoryIdEquipmentId(equipmentId)
+    public EquipmentRentHistory findById(Long equipmentId, String rentDate) {
+
+        EquipmentRentHistory equipmentRentHistory;
+
+        try {
+            equipmentRentHistory = this.findByEquipmentRentHistoryIdEquipmentId(equipmentId)
                 .stream()
                 .filter(e -> e.getEquipmentRentHistoryId().getRentDate().equals(rentDate))
-                .collect(Collectors.toList());
-        
-        EquipmentRentHistoryId equipmentRentHistoryId = equipmentRentHistoryIdList.get(0).getEquipmentRentHistoryId();
+                .collect(Collectors.toList())
+                .get(0);
+        } catch (IndexOutOfBoundsException e){
+            throw new BadRequestException("Equipment Rent History rent date not found");
+        }
 
-        return equipmentRentHistoryIdList.get(0);
-        // return equipmentRHRepository.findById(equipmentRentHistoryId).orElseThrow(() -> new BadRequestException("Equipment Rent History Id not found"));
+        return equipmentRentHistory;
     }
 
 

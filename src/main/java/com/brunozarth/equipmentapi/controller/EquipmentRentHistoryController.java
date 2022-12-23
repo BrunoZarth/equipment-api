@@ -10,6 +10,8 @@ import com.brunozarth.equipmentapi.repository.EquipmentRentHistoryRepository;
 import com.brunozarth.equipmentapi.service.impl.EquipmentRentHistoryServiceImpl;
 import com.brunozarth.equipmentapi.utils.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,8 +33,8 @@ public class EquipmentRentHistoryController {
 
     @GetMapping("/findAll")
     @ResponseStatus(HttpStatus.OK)
-    ResponseEntity<List<EquipmentRentHistory>> findAll(){
-        return new ResponseEntity<>(equipmentRHService.findAll(), HttpStatus.OK);
+    ResponseEntity<Page<EquipmentRentHistory>> findAll(Pageable pageable){
+        return new ResponseEntity<>(equipmentRHService.findAll(pageable), HttpStatus.OK);
     }
 
     @GetMapping("/findById/{equipmentId}/{rentDate}")
