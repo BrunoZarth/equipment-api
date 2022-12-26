@@ -31,9 +31,9 @@ public class SecurityConfig {
         PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
         UserDetails user = User
-                .withUsername("lucas")
+                .withUsername("admin")
                 //.username("lucas")
-                .password(passwordEncoder.encode("rocketman"))
+                .password(passwordEncoder.encode("1234"))
                 .roles("USER", "ADMIN")
                 .build();
         return new InMemoryUserDetailsManager(user);
