@@ -11,6 +11,7 @@ processes = []
 [env]
   POSTGRES_DB = "equipment"
   POSTGRES_HOST = "equipment-api-db.internal"
+  USER_PASSWORD = "rocketman"
 
 [experimental]
   allowed_public_ports = []
