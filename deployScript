@@ -1,9 +1,14 @@
+echo "Deploy process begin..." 
+echo "Maven clean..."
 mvn clean
 
+echo "Generate native image..."
 mvn spring-boot:build-image
 
+echo "Tag generated image..."
 docker tag equipment-api:0.0.1-SNAPSHOT brunozarth/equipment-api:equipment-api
 
+echo "docker push..."
 docker push brunozarth/equipment-api:equipment-api
 
 
