@@ -18,6 +18,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                .csrf().disable()
                 .authorizeHttpRequests((authz) -> authz
                         .anyRequest()
                         .authenticated()
@@ -31,9 +32,9 @@ public class SecurityConfig {
         PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
         UserDetails user = User
-                .withUsername("admin")
+                .withUsername("lucas")
                 //.username("lucas")
-                .password(passwordEncoder.encode("1234"))
+                .password(passwordEncoder.encode("rocket:man!69"))
                 .roles("USER", "ADMIN")
                 .build();
         return new InMemoryUserDetailsManager(user);

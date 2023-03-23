@@ -32,9 +32,8 @@ public class EquipmentController {
     };
 
     @GetMapping("/findById/{id}")
-    @ResponseStatus(HttpStatus.FOUND)
     ResponseEntity<Equipment> findById(@PathVariable Long id){
-        return new ResponseEntity<>(equipmentService.findById(id), HttpStatus.FOUND);
+        return ResponseEntity.ok(equipmentService.findById(id));
     };
 
     @GetMapping("/findByType/{type}")

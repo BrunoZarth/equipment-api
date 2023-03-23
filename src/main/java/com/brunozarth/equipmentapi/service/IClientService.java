@@ -14,6 +14,8 @@ public interface IClientService {
 
     Client findById(Long id);
 
+    Client findByEmail(String email);
+
     //POST / CREATE
     Client saveClient(ClientForm clientForm);
 

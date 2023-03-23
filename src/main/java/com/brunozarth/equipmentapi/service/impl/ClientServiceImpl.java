@@ -31,6 +31,11 @@ public class ClientServiceImpl implements IClientService {
     }
 
     @Override
+    public Client findByEmail(String email) {
+        return clientRepository.findByEmail(email);
+    }
+
+    @Override
     public Client saveClient(ClientForm clientForm) {
         Client client = new Client();
 

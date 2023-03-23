@@ -36,6 +36,16 @@ public class ClientController {
         return ResponseEntity.ok(clientService.findByName(name));
     }
 
+    @GetMapping("/findById/{id}")
+    public ResponseEntity<Client> findById(@PathVariable Long id){
+        return ResponseEntity.ok(clientService.findById(id));
+    }
+
+    @GetMapping("/findByEmail/{email}")
+    public ResponseEntity<Client> findByEmail(@PathVariable String email){
+        return ResponseEntity.ok(clientService.findByEmail(email));
+    }
+
     @PostMapping("/newClient")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Client> newClient(@RequestBody @Valid ClientForm clientForm){
